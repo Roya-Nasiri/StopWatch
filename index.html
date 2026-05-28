@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="box">
+        <h1>Stopwatch</h1>
+        <span></span>
+      <div class="h">
+        <div class="h2">
+          <h2></h2>
+          <h2></h2>
+          <h2></h2>
+        </div>
+        <div class="h3">
+          <h3>m</h3>
+          <h3>s</h3>
+          <h3>ms</h3>
+        </div>
+      </div>
+      
+      <div class="btn">
+        <button>start</button>
+        <button>pause</button>
+        <button>stop</button>
+        <button>lap</button>
+      </div>
+    </div>
+    <div class="myName">
+      <img src="./img/2065e7d8-cbf4-4a80-a23b-72bc2c20c9c9.jpg" alt="" />
+      <span>RoyaNasiri</span>
+      <i
+        ><a href="https://www.linkedin.com/in/roya-nasiri-81466123a">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="#0A66C2"
+          >
+            <path
+              d="M20.447 20.452H16.89V14.87c0-1.331-.027-3.045-1.856-3.045-1.857 0-2.142 1.45-2.142 2.948v5.679H9.336V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+        </a>
+      </i>
+    </div>
+
+    <script>
+      const btn = document.querySelectorAll('button');
+      const h2 = document.querySelectorAll('h2');      
+      const _lap = document.querySelector('span');      
+
+      let flag = true;
+      let ms = '00';
+      let s = '00';
+      let m = '00';
+      let x = '';
+      /////////
+
+      btn[0].addEventListener('click', () => {
+        if (flag) {
+          x = setInterval(() => {
+            ms++;
+            if (ms < 100) {
+              h2[2].innerText = ms;
+            } else {
+              ms = 0;
+              s++;
+
+              if (s < 60) {
+                h2[1].innerText = s;
+              } else {
+                s = 0;
+                m++;
+                h2[0].innerText = m;
+              }
+            }
+          }, 10);
+          flag = false;
+        }
+      });
+
+      btn[1].addEventListener('click', () => {
+        flag = true;
+        clearInterval(x);
+      });
+
+      btn[2].addEventListener('click', () => {
+        clearInterval(x);
+        ms = 0;
+        s = 0;
+        m = 0;
+        h2.forEach((val) => (val.innerText = '00'));
+        _lap.innerText = ''
+        flag = true;
+      });
+
+      btn[3].addEventListener('click', () => {
+        _lap.innerText = `${m} : ${s} : ${ms}`
+        // flag = true;
+      });
+
+    
+    </script>
+  </body>
+</html>
